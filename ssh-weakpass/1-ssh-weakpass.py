@@ -59,6 +59,8 @@ class SSHPOC(threading.Thread):
                 try:
                     ssh.connect(hostname=self.ip, port=22, username=u, password=p, timeout=5, allow_agent=False,
                                 look_for_keys=False)
+                    stdin, stdout, stderr = ssh.exec_command('id',timeout=1)
+                    id = stdout.read()
                     success="ip:%s  username:%s  password:%s \n"%(self.ip,u,p)
                     f=open("result.txt",'a')
                     f.write(success)
